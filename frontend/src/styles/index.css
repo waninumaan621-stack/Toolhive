@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #f9fafb;
+    color: #111827;
+    -webkit-font-smoothing: antialiased;
+  }
+  .dark body {
+    background-color: #080c18;
+    color: #f1f5f9;
+  }
+}
+
+@layer components {
+  .btn-gold {
+    @apply bg-amber-500 hover:bg-amber-600 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md active:scale-95 inline-flex items-center justify-center gap-2;
+  }
+  .btn-navy {
+    @apply bg-slate-800 hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 inline-flex items-center justify-center gap-2;
+  }
+  .btn-ghost {
+    @apply border border-gray-200 dark:border-slate-700 hover:border-amber-400 text-gray-700 dark:text-gray-300 font-medium px-5 py-2.5 rounded-xl text-sm transition-all duration-200 bg-white dark:bg-slate-800 hover:text-amber-600 inline-flex items-center justify-center gap-2;
+  }
+  .card {
+    @apply bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm;
+  }
+  .tool-card {
+    @apply bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm p-5 hover:border-amber-300 dark:hover:border-amber-600 hover:shadow-md transition-all duration-200 cursor-pointer;
+  }
+  .input-field {
+    @apply w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-all;
+  }
+  .label {
+    @apply block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5 uppercase tracking-wide;
+  }
+  .upload-zone {
+    @apply border-2 border-dashed border-gray-200 dark:border-slate-700 rounded-2xl p-10 text-center hover:border-amber-400 transition-all duration-200 cursor-pointer;
+  }
+}
+
+/* Dark mode */
+.dark { color-scheme: dark; }
+.dark body { background-color: #080c18; color: #f1f5f9; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 99px; }
+.dark ::-webkit-scrollbar-thumb { background: #374151; }
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-up { animation: fadeUp 0.4s ease both; }
+.animate-fade-in { animation: fadeIn 0.3s ease both; }
+.animate-slide-down { animation: slideDown 0.25s ease both; }
+.animate-count { animation: countUp 0.5s ease both; }
+
+/* Ad slot — hidden until code pasted */
+.ad-slot {
+  display: none;
+}
+.ad-slot.ad-active {
+  display: flex;
+  @apply w-full overflow-hidden rounded-xl items-center justify-center text-xs text-gray-400 dark:text-gray-600;
+  min-height: 90px;
+}
+.ad-slot-sidebar {
+  display: none;
+}
+.ad-slot-sidebar.ad-active {
+  display: flex;
+  @apply w-full overflow-hidden rounded-xl items-center justify-center text-xs text-gray-400 dark:text-gray-600;
+  min-height: 250px;
+}
+
+/* Toast */
+.toast {
+  @apply fixed bottom-6 right-6 z-50 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-5 py-3 rounded-xl shadow-2xl text-sm font-medium flex items-center gap-2;
+  animation: fadeUp 0.3s ease both;
+}
+
+/* Upload drag active */
+.upload-zone.dragover {
+  @apply border-amber-400 bg-amber-50 dark:bg-amber-900/10;
+}

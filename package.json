@@ -1,0 +1,8 @@
+{
+  "name": "toolhive",
+  "version": "1.0.0",
+  "description": "ToolHive — Free Online Tools",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install"
+  }
+}
