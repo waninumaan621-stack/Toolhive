@@ -1,8 +1,14 @@
-const BASE = import.meta.env.VITE_API_URL || '/api';
+const BASE = import.meta.env.VITE_API_URL || 'https://toolhive.onrender.com/api';
 
 export const api = {
   get: async (path) => {
-    const res = await fetch(`${BASE}${path}`);
+    const token = localStorage.getItem('th_admin_token');
+    const res = await fetch(`${BASE}${path}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+    });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Request failed');
     return data;
@@ -35,9 +41,35 @@ export const api = {
     if (!res.ok) throw new Error(data.error || 'Request failed');
     return data;
   },
+  patch: async (path, body) => {
+    const token = localStorage.getItem('th_admin_token');
+    const res = await fetch(`${BASE}${path}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Request failed');
+    return data;
+  },
+  delete: async (path) => {
+    const token = localStorage.getItem('th_admin_token');
+    const res = await fetch(`${BASE}${path}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Request failed');
+    return data;
+  },
 };
 
-// Track visit
 export const trackVisit = async (tool, category) => {
   try {
     await fetch(`${BASE}/stats/visit`, {
