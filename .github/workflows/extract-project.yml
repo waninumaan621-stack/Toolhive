@@ -1,0 +1,50 @@
+name: Extract ToolHive Project
+
+on:
+  push:
+    paths:
+      - "*.zip"
+      - ".github/workflows/extract-project.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Find and extract zip
+        run: |
+          ZIP_FILE=$(ls *.zip 2>/dev/null | head -n 1)
+          if [ -z "$ZIP_FILE" ]; then
+            echo "No zip found — skipping."
+            exit 0
+          fi
+          echo "Found: $ZIP_FILE"
+          mkdir extracted
+          unzip -q "$ZIP_FILE" -d extracted
+          if [ -d "extracted/backend" ] && [ -d "extracted/frontend" ]; then
+            cp -R extracted/. .
+          else
+            PROJECT_DIR=$(find extracted -name "package.json" -maxdepth 4 | head -n 1 | xargs dirname)
+            if [ -z "$PROJECT_DIR" ]; then
+              cp -R extracted/. .
+            else
+              cp -R "$PROJECT_DIR"/. .
+            fi
+          fi
+          rm -rf extracted
+          rm -f "$ZIP_FILE"
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add -A
+          git diff --cached --quiet && echo "Nothing to commit" && exit 0
+          git commit -m "Extract ToolHive v3"
+          git push
