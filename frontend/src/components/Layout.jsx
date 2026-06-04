@@ -120,6 +120,13 @@ export default function Layout({ children }) {
                 >
                   ℹ️ About & Contact
                 </Link>
+                {/* New Blog Link */}
+                <Link
+                  to="/blog"
+                  className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-amber-50 dark:hover:bg-slate-800 hover:text-amber-600 transition-colors"
+                >
+                  📝 Blog
+                </Link>
               </div>
 
               {/* Contact info directly in menu */}
@@ -200,6 +207,10 @@ export default function Layout({ children }) {
               </Link>
               <Link to="/about" className="text-xs text-gray-400 hover:text-amber-500 transition-colors">
                 About
+              </Link>
+              {/* New Blog Link in Footer */}
+              <Link to="/blog" className="text-xs text-gray-400 hover:text-amber-500 transition-colors">
+                Blog
               </Link>
             </div>
           </div>
