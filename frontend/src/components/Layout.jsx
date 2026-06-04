@@ -140,16 +140,10 @@ export default function Layout({ children }) {
             ))}
           </div>
           <div className="border-t border-gray-100 dark:border-slate-800 pt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p className="text-xs text-gray-400">© 2026 ToolHive. Created by <span className="text-amber-600 font-medium">Wani Numaan</span>. All rights reserved.</p>
-            <div className="flex items-center gap-4">
-              <a href="mailto:waninumaan621@gmail.com" className="text-xs text-gray-400 hover:text-amber-500 transition-colors flex items-center gap-1">
-                ✉️ waninumaan621@gmail.com
-              </a>
-              <Link to="/about" className="text-xs text-gray-400 hover:text-amber-500 transition-colors">About</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-}
+           <p className="text-xs text-gray-400">© 2026 ToolHive. Created by <span className="text-amber-600 font-medium">Wani Numaan</span>. All rights reserved.</p>
+<div className="flex items-center gap-4">
+  <a href="mailto:waninumaan621@gmail.com" className="text-xs text-gray-400 hover:text-amber-500 transition-colors">✉️ waninumaan621@gmail.com</a>
+  <Link to="/privacy" className="text-xs text-gray-400 hover:text-amber-500 transition-colors">Privacy Policy</Link>
+  <Link to="/terms" className="text-xs text-gray-400 hover:text-amber-500 transition-colors">Terms of Service</Link>
+  <Link to="/about" className="text-xs text-gray-400 hover:text-amber-500 transition-colors">About</Link>
+</div>
